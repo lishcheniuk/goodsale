@@ -1,7 +1,7 @@
 <template>
   <article class="ad">
     <img class="ad__img" :src="validImage(ad.image)" />
-    <!-- <div class="ad__content"> -->
+
     <h3 class="ad__title">
       {{ ad.name }}
     </h3>
@@ -22,7 +22,7 @@
     <p class="ad__desc">
       {{ ad.description }}
     </p>
-    <!-- <div class="ad__content__footer ad-footer"> -->
+
     <div class="ad__categories">
       <svg
         class="category"
@@ -42,8 +42,6 @@
       >
     </div>
     <a class="ad__link" @click="$router.push(`/${ad.id}`)">переглянути</a>
-    <!-- </div> -->
-    <!-- </div> -->
   </article>
 </template>
 
@@ -57,8 +55,7 @@ export default {
   },
   methods: {
     validImage(path) {
-      const formats = [".png", ".jpg", ".jpeg"];
-      return formats.some(f => path.includes(f))
+      return /^https:\/\/loremflickr.com\//.test(path)
         ? path
         : "https://loremflickr.com/250/250";
     }
@@ -78,6 +75,7 @@ export default {
     "img desc desc"
     "img  cats link";
   align-items: start;
+  grid-template-columns: auto 1fr 1fr;
 
   &__img {
     grid-area: img;
