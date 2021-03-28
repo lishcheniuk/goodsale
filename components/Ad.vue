@@ -75,7 +75,7 @@ export default {
     "img desc desc"
     "img  cats link";
   align-items: start;
-  grid-template-columns: auto 1fr 1fr;
+  grid-template-columns: auto 1fr max-content;
 
   &__img {
     grid-area: img;
@@ -173,6 +173,7 @@ export default {
 @media (max-width: 730px) {
   .ad {
     grid-template-areas: "title" "img" "cats" "price" "desc" "link";
+    grid-template-columns: 1fr;
     grid-gap: 16px 0;
     padding: 0 0 16px;
     border: none;
