@@ -19,4 +19,10 @@
     cursor: pointer;
   }
 }
+
+@media (max-width: 730px) {
+  .header__logo {
+    max-width: 50%;
+  }
+}
 </style>

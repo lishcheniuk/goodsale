@@ -2,7 +2,7 @@
   <div class="default-layout">
     <Head />
 
-    <main class="default-layout__main">
+    <main>
       <Nuxt />
     </main>
 
@@ -24,9 +24,15 @@ export default {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
+  min-width: 320px;
+}
+main {
+  margin: 53px 0 141px;
+}
 
-  &__main {
-    margin: 53px 0 141px;
+@media (max-width: 730px) {
+  main {
+    margin: 0;
   }
 }
 </style>

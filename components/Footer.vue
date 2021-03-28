@@ -98,15 +98,6 @@ export default {
     border-bottom: 1px solid $bg_color;
   }
 
-  &__logo {
-    text-align: center;
-    margin: 38px 0 26px;
-
-    img {
-      width: 288px;
-    }
-  }
-
   .form-footer {
     color: $color_grey;
     display: flex;
@@ -150,6 +141,33 @@ export default {
       border: none;
       cursor: pointer;
     }
+  }
+
+  &__logo {
+    text-align: center;
+    margin: 38px auto 26px;
+    max-width: 288px;
+
+    img {
+      max-width: 100%;
+    }
+  }
+}
+
+@media (max-width: 730px) {
+  .form-footer {
+    flex-direction: column;
+
+    &__input {
+      margin-right: 0 !important;
+    }
+
+    &__btn {
+      margin: auto;
+    }
+  }
+  .footer__logo {
+    max-width: 200px;
   }
 }
 </style>

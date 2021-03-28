@@ -1,51 +1,49 @@
 <template>
   <article class="ad">
     <img class="ad__img" :src="validImage(ad.image)" />
-    <div class="ad__content">
-      <h3 class="ad__content__title">
-        {{ ad.name }}
-      </h3>
-      <div class="ad__content__price price-ad">
-        <span class="price-ad__discount" v-if="ad.discount_amount">
-          <svg class="price-ad__icon" fill="#6C6C6C" width="17" height="12">
-            <use xlink:href="sprite.svg#vector"></use>
-          </svg>
-          $ {{ ad.discount_amount }}
-        </span>
-        <span class="price-ad__current">
-          <svg class="price-ad__icon" fill="#cc9966" width="17" height="12">
-            <use xlink:href="sprite.svg#vector"></use>
-          </svg>
-          $ {{ ad.price }}
-        </span>
-      </div>
-      <p class="ad__content__desc">
-        {{ ad.description }}
-      </p>
-      <div class="ad__content__footer ad-footer">
-        <div class="ad-footer__categories">
-          <svg
-            class="category"
-            fill="#cc9966"
-            width="15"
-            height="15"
-            v-if="ad.categories.length"
-          >
-            <use xlink:href="sprite.svg#category"></use>
-          </svg>
-          <a
-            v-for="(c, index) of ad.categories"
-            :key="c.id"
-            @click="$router.push(`/search?category=${c.id}`)"
-            >{{ c.name
-            }}{{ index === ad.categories.length - 1 ? "" : ",&nbsp;" }}</a
-          >
-        </div>
-        <a class="ad-footer__link" @click="$router.push(`/${ad.id}`)"
-          >переглянути</a
-        >
-      </div>
+    <!-- <div class="ad__content"> -->
+    <h3 class="ad__title">
+      {{ ad.name }}
+    </h3>
+    <div class="ad__price">
+      <span class="ad__price__discount" v-if="ad.discount_amount">
+        <svg class="ad__price__icon" fill="#6C6C6C" width="17" height="12">
+          <use xlink:href="sprite.svg#vector"></use>
+        </svg>
+        $ {{ ad.discount_amount }}
+      </span>
+      <span class="ad__price__current">
+        <svg class="ad__price__icon" fill="#cc9966" width="17" height="12">
+          <use xlink:href="sprite.svg#vector"></use>
+        </svg>
+        $ {{ ad.price }}
+      </span>
     </div>
+    <p class="ad__desc">
+      {{ ad.description }}
+    </p>
+    <!-- <div class="ad__content__footer ad-footer"> -->
+    <div class="ad__categories">
+      <svg
+        class="category"
+        fill="#cc9966"
+        width="15"
+        height="15"
+        v-if="ad.categories.length"
+      >
+        <use xlink:href="sprite.svg#category"></use>
+      </svg>
+      <a
+        v-for="(c, index) of ad.categories"
+        :key="c.id"
+        @click="$router.push(`/search?category=${c.id}`)"
+        >{{ c.name
+        }}{{ index === ad.categories.length - 1 ? "" : ",&nbsp;" }}</a
+      >
+    </div>
+    <a class="ad__link" @click="$router.push(`/${ad.id}`)">переглянути</a>
+    <!-- </div> -->
+    <!-- </div> -->
   </article>
 </template>
 
@@ -70,108 +68,123 @@ export default {
 
 <style lang="scss">
 .ad {
-  height: 360px;
-  display: flex;
   border: 1px solid $bg_color;
   margin-top: 35px;
+  padding-right: 60px;
+  display: grid;
+  grid-template-areas:
+    "img title title"
+    "img price price"
+    "img desc desc"
+    "img  cats link";
+  align-items: start;
 
   &__img {
-    flex-basis: 252px;
+    grid-area: img;
+    max-width: 252px;
+    height: 360px;
+    margin-right: 60px;
   }
 
-  &__content {
-    flex-grow: 1;
-    margin: 0 60px;
-    padding: 52px 0;
-    display: flex;
-    flex-direction: column;
+  .ad__title {
+    grid-area: title;
+    align-self: end;
+    font: 800 18px "Montserrat";
+  }
 
-    &__title {
-      font: 800 18px "Montserrat";
-    }
+  .ad__price {
+    grid-area: price;
+    align-self: center;
 
-    &__desc {
-      font-size: 14px;
-      line-height: 20px;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      max-height: 40%;
-    }
-
-    .price-ad {
-      margin: 28px 0;
-
-      &__discount,
-      &__current {
-        margin-right: 27px;
-        svg {
-          margin-right: 10px;
-        }
-      }
-
-      &__discount {
-        color: #6c6c6c;
-        font-size: 12px;
-        text-decoration: line-through;
-      }
-
-      &__current {
-        font-weight: 700;
+    &__discount,
+    &__current {
+      margin-right: 27px;
+      svg {
+        margin-right: 10px;
       }
     }
 
-    .ad-footer {
-      margin-top: auto;
-      padding-top: 14px;
-      display: flex;
-      justify-content: space-between;
+    &__discount {
+      color: #6c6c6c;
+      font-size: 12px;
+      text-decoration: line-through;
+    }
 
-      &__categories {
-        font-size: 12px;
-        line-height: 20px;
-        // display: flex;
-        // align-items: center;
+    &__current {
+      font-weight: 700;
+    }
+  }
 
-        a {
-          color: #6c6c6c;
-          text-decoration: none;
-          cursor: pointer;
+  .ad__desc {
+    font-size: 14px;
+    line-height: 20px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    grid-area: desc;
+  }
 
-          &:hover {
-            text-decoration: underline;
-          }
-        }
+  .ad__categories {
+    font-size: 12px;
+    line-height: 20px;
+    grid-area: cats;
 
-        svg {
-          margin-right: 10px;
-          position: relative;
-          top: 3px;
-        }
+    a {
+      color: #6c6c6c;
+      text-decoration: none;
+      cursor: pointer;
+
+      &:hover {
+        text-decoration: underline;
       }
-      &__link {
-        display: inline-block;
-        font: 800 14px "Montserrat";
-        position: relative;
-        padding: 5px 0 5px 53px;
-        cursor: pointer;
-        margin-left: 10px;
-        align-self: center;
+    }
 
-        &::before {
-          content: "";
-          display: inline-block;
-          position: absolute;
-          top: 50%;
-          left: 0;
-          width: 30%;
-          height: 3.3px;
-          background-color: $color_main;
-        }
+    svg {
+      margin-right: 10px;
+      position: relative;
+      top: 3px;
+    }
+  }
 
-        &:hover {
-          text-decoration: underline;
-        }
-      }
+  .ad__link {
+    display: inline-block;
+    font: 800 14px "Montserrat";
+    position: relative;
+    padding: 5px 0 5px 53px;
+    cursor: pointer;
+    margin-left: 10px;
+    grid-area: link;
+    justify-self: end;
+
+    &::before {
+      content: "";
+      display: inline-block;
+      position: absolute;
+      top: 50%;
+      left: 0;
+      width: 30%;
+      height: 3.3px;
+      background-color: $color_main;
+    }
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}
+
+@media (max-width: 730px) {
+  .ad {
+    grid-template-areas: "title" "img" "cats" "price" "desc" "link";
+    grid-gap: 16px 0;
+    padding: 0 0 16px;
+    border: none;
+    border-bottom: 1px solid $bg_color;
+
+    &__img {
+      min-width: 100%;
+      min-height: 50%;
+      object-fit: cover;
+      object-position: center;
     }
   }
 }
