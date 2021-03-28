@@ -20,6 +20,10 @@ export default {
     ]
   },
 
+  env: {
+    baseUrl: process.env.BASE_URL || "http://localhost:3000/"
+  },
+
   loading: { color: "#cc9966" },
 
   css: ["~assets/global.scss"],

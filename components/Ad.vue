@@ -41,7 +41,12 @@
         }}{{ index === ad.categories.length - 1 ? "" : ",&nbsp;" }}</a
       >
     </div>
-    <a class="ad__link" @click="$router.push(`/${ad.id}`)">переглянути</a>
+    <a
+      v-if="!$route.params.id"
+      class="ad__link"
+      @click="$router.push(`product/${ad.id}`)"
+      >переглянути</a
+    >
   </article>
 </template>
 
