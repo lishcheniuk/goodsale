@@ -44,7 +44,7 @@
     <a
       v-if="!$route.params.id"
       class="ad__link"
-      @click="$router.push(`product/${ad.id}`)"
+      @click="$router.push(`/${ad.id}`)"
       >переглянути</a
     >
   </article>
