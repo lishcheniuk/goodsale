@@ -5,18 +5,18 @@
     <h3 class="ad__title">
       {{ ad.name }}
     </h3>
-    <div class="ad__price">
-      <span class="ad__price__discount" v-if="ad.discount_amount">
-        <svg class="ad__price__icon" fill="#6C6C6C" width="17" height="12">
-          <use xlink:href="sprite.svg#vector"></use>
-        </svg>
-        $ {{ ad.discount_amount }}
-      </span>
-      <span class="ad__price__current">
-        <svg class="ad__price__icon" fill="#cc9966" width="17" height="12">
+    <div class="ad__price price-ad">
+      <span class="price-ad__discount" v-if="ad.discount_amount">
+        <svg class="price-ad__icon" fill="#6C6C6C" width="17" height="12">
           <use xlink:href="sprite.svg#vector"></use>
         </svg>
         $ {{ ad.price }}
+      </span>
+      <span class="price-ad__current">
+        <svg class="price-ad__icon" fill="#cc9966" width="17" height="12">
+          <use xlink:href="sprite.svg#vector"></use>
+        </svg>
+        $ {{ ad.discount_amount }}
       </span>
     </div>
     <p class="ad__desc">
@@ -95,7 +95,7 @@ export default {
     font: 800 18px "Montserrat";
   }
 
-  .ad__price {
+  .price-ad {
     grid-area: price;
     align-self: center;
 

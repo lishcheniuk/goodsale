@@ -1,9 +1,9 @@
 <template>
   <div class="pagination">
     <ul class="pagination__list">
-      <li class="pagination__item ">
+      <li class="pagination__item pagination__item--back">
         <a
-          class="pagination__item__link"
+          class="pagination__link "
           href="#"
           @click.prevent="$emit('to', -1, true)"
           >назад</a
@@ -17,20 +17,14 @@
           'pagination__item--active': currentPage === p
         }"
       >
-        <a
-          class="pagination__item__link"
-          href="#"
-          @click.prevent="$emit('to', p)"
-          >{{ p }}</a
-        >
-      </li>
-      <li class=" pagination__item more" v-if="pages - 2 > currentPage">
-        . . .
+        <a class="pagination__link" href="#" @click.prevent="$emit('to', p)">{{
+          p
+        }}</a>
       </li>
 
       <li class="pagination__item">
         <a
-          class="pagination__item__link"
+          class="pagination__link"
           href="#"
           @click.prevent="$emit('to', 1, true)"
           >вперед</a
@@ -75,24 +69,22 @@ export default {
     border: 1px solid $color_main;
     margin-left: 29px;
     padding: 15px 21px;
-    &__link {
-      //display: inline-block;
 
-      cursor: pointer;
-      font-size: 14px;
-      text-decoration: none;
-      color: $color_main;
+    &--back {
+      border: 1px solid #c4c4c4;
 
-      &:hover {
-        text-decoration: underline;
+      .pagination__link {
+        color: #c4c4c4;
       }
     }
 
     &--active {
       background-color: $bg_color2;
+      border: 1px solid transparent;
 
-      .pagination__item__link {
+      .pagination__link {
         color: #fff;
+        font-size: 12px;
       }
     }
 
@@ -104,12 +96,27 @@ export default {
       padding: 5px;
     }
   }
+
+  &__link {
+    cursor: pointer;
+    font-size: 14px;
+    text-decoration: none;
+    color: $color_main;
+    font-weight: 600;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
 }
 
 @media (max-width: 730px) {
   .pagination__item {
     margin-left: 9px;
-    padding: 5px 10px;
+    padding: 4px 12px 7px;
+  }
+  .pagination__link {
+    font-size: 12px;
   }
 }
 </style>
